@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>AmazonWebscrappingData.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+AmazonWebscrappingData.py</font>
+</center></td></tr></table>
+<pre><span class="s0">from </span><span class="s1">bs4 </span><span class="s0">import </span><span class="s1">BeautifulSoup</span>
+<span class="s0">import </span><span class="s1">requests</span>
+<span class="s0">import </span><span class="s1">datetime</span>
+
+
+<span class="s1">today = datetime.date.today()</span>
+
+
+
+<span class="s1">url = </span><span class="s2">'https://www.amazon.com/Vans-Authentic-Black-Size/dp/B081PVVSPD/ref=sxin_14_ac_d_rm?ac_md=0-0-dmFucw%3D%3D-ac_d_rm_rm_rm&amp;crid=3P0PFAQHJ67SK&amp;cv_ct_cx=vans&amp;keywords=vans&amp;pd_rd_i=B081PVVSPD&amp;pd_rd_r=edd9e93a-b2e6-4831-9973-d32ed38adcbf&amp;pd_rd_w=JbyX9&amp;pd_rd_wg=iEr7Y&amp;pf_rd_p=4ddd8e40-6b01-4726-9d0f-a100f252099e&amp;pf_rd_r=EZ3F21BN44FEWJM6PSJK&amp;qid=1643643893&amp;sprefix=vans%2Caps%2C115&amp;sr=1-1-12d4272d-8adb-4121-8624-135149aa9081&amp;th=1&amp;psc=1'</span>
+
+<span class="s1">headers =  {</span><span class="s2">&quot;User-Agent&quot; </span><span class="s1">: </span><span class="s2">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36 Edg/97.0.1072.76&quot;</span><span class="s0">,</span>
+    <span class="s2">&quot;X-Amzn-Trace-Id&quot;</span><span class="s1">: </span><span class="s2">&quot;Root=1-61f93a54-517931a65d836472753cbb9c&quot;</span><span class="s1">}</span>
+
+
+<span class="s1">page = requests.get(url</span><span class="s0">, </span><span class="s1">headers=headers</span><span class="s0">, </span><span class="s1">verify=</span><span class="s0">False</span><span class="s1">)</span>
+<span class="s1">print(page.text)</span>
+
+<span class="s1">soup1 = BeautifulSoup(page.content</span><span class="s0">, </span><span class="s2">&quot;html.parser&quot;</span><span class="s1">)</span>
+
+<span class="s1">soup2 = BeautifulSoup(soup1.prettify()</span><span class="s0">, </span><span class="s2">&quot;html.parser&quot;</span><span class="s1">)</span>
+
+<span class="s1">title = soup2.find(id=</span><span class="s2">'productTitle'</span><span class="s1">).get_text()</span>
+
+<span class="s1">price = soup2.find(id=</span><span class="s2">&quot;a-price-whole&quot;</span><span class="s1">).get_text()</span>
+
+<span class="s1">print (title)</span>
+<span class="s1">print (price)</span>
+
+
+
+
+</pre>
+</body>
+</html>
